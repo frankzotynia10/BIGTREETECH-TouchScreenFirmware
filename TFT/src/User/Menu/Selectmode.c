@@ -177,14 +177,14 @@ void selectmode(int8_t  nowMode)
   {
     GUI_SetColor(ST7920_FNCOLOR);
     GUI_DispStringInRect(text_startx, rect_of_mode[1].y0-BYTE_HEIGHT+ICON_WIDTH+BYTE_WIDTH, LCD_WIDTH, rect_of_mode[1].y0+ICON_WIDTH+BYTE_WIDTH,(uint8_t *)"Touch Mode");
-    GUI_SetColor(FONT_COLOR);
+    GUI_SetColor(lcd_colors[infoSettings.font_color]);
     GUI_DispStringInRect(0, rect_of_mode[1].y0-BYTE_HEIGHT+ICON_WIDTH+BYTE_WIDTH, text_startx, rect_of_mode[1].y0+ICON_WIDTH+BYTE_WIDTH,(uint8_t *)"Marlin Mode");
   }
   else
   {
     GUI_SetColor(ST7920_FNCOLOR);
     GUI_DispStringInRect(0, rect_of_mode[1].y0-BYTE_HEIGHT+ICON_WIDTH+BYTE_WIDTH, text_startx,rect_of_mode[1].y0+ICON_WIDTH+BYTE_WIDTH,(uint8_t *)"Marlin Mode");
-    GUI_SetColor(FONT_COLOR);
+    GUI_SetColor(lcd_colors[infoSettings.font_color]);
     GUI_DispStringInRect(text_startx,rect_of_mode[1].y0-BYTE_HEIGHT+ICON_WIDTH+BYTE_WIDTH,LCD_WIDTH,rect_of_mode[1].y0+ICON_WIDTH+BYTE_WIDTH,(uint8_t *)"Touch Mode");
   }
 }

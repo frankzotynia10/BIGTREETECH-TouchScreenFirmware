@@ -37,8 +37,8 @@ void infoMenuSelect(void)
       #ifdef BUZZER_PIN
         Buzzer_Config();
       #endif
-      GUI_SetColor(FONT_COLOR);
-      GUI_SetBkColor(BACKGROUND_COLOR);
+      GUI_SetColor(lcd_colors[infoSettings.font_color]);
+      GUI_SetBkColor(lcd_colors[infoSettings.bg_color]);
 
       #ifdef UNIFIED_MENU //if Unified menu is selected
         infoMenu.menu[infoMenu.cur] = menuStatus; //status screen as default screen on boot
@@ -71,8 +71,8 @@ void infoMenuSelect(void)
           knob_LED_DeInit();
         #endif
       #endif
-      GUI_SetColor(ST7920_FNCOLOR);
-      GUI_SetBkColor(ST7920_BKCOLOR);
+      GUI_SetColor(lcd_colors[infoSettings.marlin_mode_font_color]);
+      GUI_SetBkColor(lcd_colors[infoSettings.marlin_mode_bg_color]);
       infoMenu.menu[infoMenu.cur] = menuST7920;
       break;
 
@@ -83,21 +83,16 @@ void infoMenuSelect(void)
 #if LCD_ENCODER_SUPPORT
 void menuMode(void)
 {
-  #if defined(ST7920_BANNER_TEXT)
-    RADIO modeRadio = {
-      {(u8*)"Serial Touch Screen", (u8*)ST7920_BANNER_TEXT, (u8*)"LCD2004 Simulator"},
-      SIMULATOR_XSTART, SIMULATOR_YSTART,
-      BYTE_HEIGHT*2, 2,
-      0
-      };
-  #else
-    RADIO modeRadio = {
-      {(u8*)"Serial Touch Screen", (u8*)"12864 Simulator", (u8*)"LCD2004 Simulator"},
-      SIMULATOR_XSTART, SIMULATOR_YSTART,
-      BYTE_HEIGHT*2, 2,
-      0
-      };
-  #endif
+
+  STRINGS_STORE tempST;
+  W25Qxx_ReadBuffer((uint8_t *)&tempST,STRINGS_STORE_ADDR,sizeof(STRINGS_STORE));
+
+  RADIO modeRadio = {
+    {(u8*)"Serial Touch Screen", (u8*)tempST.marlin_title, (u8*)"LCD2004 Simulator"},
+    SIMULATOR_XSTART, SIMULATOR_YSTART,
+    BYTE_HEIGHT*2, 2,
+    0
+    };
 
   MKEY_VALUES  key_num = MKEY_IDLE;
   MODEselect = 1;
@@ -106,7 +101,7 @@ void menuMode(void)
   int16_t /*nowEncoder =*/ encoderPosition = 0;
   int8_t  nowMode = modeRadio.select = infoSettings.mode;
 
-  GUI_Clear(BACKGROUND_COLOR);
+  GUI_Clear(lcd_colors[infoSettings.bg_color]);
   //RADIO_Create(&modeRadio);
   #ifndef CLEAN_MODE_SWITCHING_SUPPORT
     Serial_ReSourceDeInit();
