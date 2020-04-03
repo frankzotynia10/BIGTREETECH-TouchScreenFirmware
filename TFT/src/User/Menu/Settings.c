@@ -1,6 +1,5 @@
 #include "Settings.h"
 #include "includes.h"
-#include "config_default.h"
 
 
 SETTINGS infoSettings;
