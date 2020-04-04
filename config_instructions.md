@@ -18,16 +18,16 @@ Before Editing config.ini file please read the following points:
    - All G-Code strings should be in single Line.
    - To denote EOL / NewLine, Use **\n** in the G-Code strings. The TFT will convert the **\n** to EOL while updating. eg.
      ```
-     start_g_code:G28\nG29\nG1 X10 Y10 Z10\n
+     start_gcode:G28\nG29\nG1 X10 Y10 Z10\n
      ```
 
 ### Instructions:
 1. Open the **config.ini** File in any text editor like Notepad or Notepad++.
-    ![png]()
+    ![image1](images/config1.png)
 
 
 2. Change the settings parameter values according to options provided in the **config.ini** file.
-    ![png]()
+    ![image2](images/config2.png)
 
 
 3. Ignore / Leave the Keywords that are not supported by your TFT Variant. All unsupported Settings Keywords are skipped by the TFT.
@@ -38,7 +38,7 @@ Before Editing config.ini file please read the following points:
 
 
 5.  Copy the **config.ini** file to the root directory of the SD card. (The SD card capacity should be less than or equal to 8GB and formatted as FAT32)
-   ![png]()
+   ![image3](images/config3.png)
 
 
 6. Insert the SD card in the TFT's SD card slot and restart the TFT by pressing the reset buttion or disconnecting and connecting the power cable.
