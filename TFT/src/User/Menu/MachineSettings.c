@@ -1,5 +1,4 @@
 #include "MachineSettings.h"
-#include "includes.h"
 
 u8 enabled_gcodes[CUSTOM_GCODES_COUNT];
 u8 gcode_num;
@@ -71,7 +70,7 @@ void menuCustom(void)
   customcodes = (CUSTOM_GCODES*)malloc(sizeof(CUSTOM_GCODES));
   gc_cur_page = 0;
   W25Qxx_ReadBuffer((u8*)customcodes,CUSTOM_GCODE_ADDR,sizeof(CUSTOM_GCODES));
-  
+
   gcode_num = customcodes->count;
 
   gc_page_count = (gcode_num+LISTITEM_PER_PAGE-1)/LISTITEM_PER_PAGE;
