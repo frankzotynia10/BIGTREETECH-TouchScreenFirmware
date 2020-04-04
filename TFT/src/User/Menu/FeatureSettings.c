@@ -42,7 +42,6 @@ const LABEL itemMoveSpeed[ITEM_SPEED_NUM] = {
                                               LABEL_FAST_SPEED
                                             };
 
-
 //
 //add key number index of the items
 //
@@ -104,9 +103,9 @@ LISTITEM settingPage[SKEY_COUNT] = {
   {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_KNOB_LED,                 LABEL_OFF         },
   #endif
   #ifdef LCD_LED_PIN
-  {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_LCD_BRIGHTNESS,           LABEL_100_PERCENT },
-  {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_LCD_BRIGHTNESS_DIM,       LABEL_100_PERCENT },
-  {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_LCD_DIM_IDLE_TIMER,       LABEL_60_SECONDS  },
+  {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_LCD_BRIGHTNESS,           LABEL_DYNAMIC },
+  {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_LCD_BRIGHTNESS_DIM,       LABEL_DYNAMIC },
+  {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_LCD_DIM_IDLE_TIMER,       LABEL_DYNAMIC },
   #endif
   #ifdef ST7920_SPI
   {ICONCHAR_BLANK,      LIST_TOGGLE,        LABEL_ST7920_FULLSCREEN,        LABEL_OFF         },
@@ -257,20 +256,25 @@ void updateFeatureSettings(uint8_t key_val)
 
     #ifdef LCD_LED_PIN
     case SKEY_LCD_BRIGHTNESS:
+      {
       infoSettings.lcd_brightness = (infoSettings.lcd_brightness + 1) % ITEM_BRIGHTNESS_NUM;
-      settingPage[item_index].valueLabel = itemBrightness[infoSettings.lcd_brightness];
-      featureSettingsItems.items[key_val] = settingPage[item_index];
-      Set_LCD_Brightness(LCD_BRIGHTNESS[infoSettings.lcd_brightness])
-
+      char tempstr[8];
+      my_sprintf(tempstr,(char *)textSelect(LABEL_PERCENT_VALUE),infoSettings.lcd_idle_brightness);
+      setDynamicTextValue(key_val,tempstr);
+      Set_LCD_Brightness(LCD_BRIGHTNESS[infoSettings.lcd_brightness]);
       menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
+      }
       break;
 
     case SKEY_LCD_BRIGTHNESS_DIM:
+      {
       infoSettings.lcd_idle_brightness = (infoSettings.lcd_idle_brightness + 1) % ITEM_BRIGHTNESS_NUM;
-      settingPage[item_index].valueLabel = itemBrightness[infoSettings.lcd_idle_brightness];
-      featureSettingsItems.items[key_val] = settingPage[item_index];
+      char tempstr[8];
+      my_sprintf(tempstr,(char *)textSelect(LABEL_PERCENT_VALUE),infoSettings.lcd_idle_brightness);
+      setDynamicTextValue(key_val,tempstr);
 
       menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
+      }
       break;
 
     case SKEY_LCD_DIM_IDLE_TIMER:
@@ -374,17 +378,25 @@ void loadFeatureSettings(){
       #endif
       #ifdef LCD_LED_PIN
       case SKEY_LCD_BRIGHTNESS:
-        settingPage[item_index].valueLabel = itemBrightness[infoSettings.lcd_brightness];
+        {
+        char tempstr[8];
+        my_sprintf(tempstr,(char *)textSelect(LABEL_PERCENT_VALUE),infoSettings.lcd_idle_brightness);
+        setDynamicTextValue(i,tempstr);
         featureSettingsItems.items[i] = settingPage[item_index];
+        }
         break;
 
       case SKEY_LCD_BRIGTHNESS_DIM:
-        settingPage[item_index].valueLabel = itemBrightness[infoSettings.lcd_idle_brightness];
+        {
+        char tempstr[8];
+        my_sprintf(tempstr,(char *)textSelect(LABEL_PERCENT_VALUE),infoSettings.lcd_idle_brightness);
+        setDynamicTextValue(i,tempstr);
         featureSettingsItems.items[i] = settingPage[item_index];
         break;
       case SKEY_LCD_DIM_IDLE_TIMER:
         settingPage[item_index].valueLabel = itemDimTime[infoSettings.lcd_idle_timer];
         featureSettingsItems.items[i] = settingPage[item_index];
+        }
         break;
       #endif //LCD_LED_PIN
 

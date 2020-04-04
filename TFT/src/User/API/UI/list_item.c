@@ -7,6 +7,8 @@
 
 char * dynamic_label[LISTITEM_PER_PAGE];
 
+char * dynamic_text_value[LISTITEM_PER_PAGE];
+
 float dynamic_value[LISTITEM_PER_PAGE];
 
 const uint16_t ICON_COLOR[ICONCHAR_NUM]=
@@ -248,7 +250,17 @@ char * getDynamicLabel(uint8_t i){
   return dynamic_label[i];
 }
 
-// save dynamic value ( i : index of the value position, value:float value)
+// save dynamic text value (upto 7 characters) ( i : index of the text value position, txt: char * to the text value)
+void setDynamicTextValue(uint8_t i, char *txt){
+  dynamic_text_value[i] = txt;
+}
+
+// get dynamic text value ( i : index of the text value position)
+char * getDynamicTextValue(uint8_t i){
+  return dynamic_text_value[i];
+}
+
+// save dynamic value (upto 7 digits) ( i : index of the value position, value:float value)
 void setDynamicValue(uint8_t i,float value){
 dynamic_value[i] = value;
 }
@@ -501,17 +513,26 @@ void ListItem_DisplayCustomValue(const GUI_RECT* rect,LABEL value,int i)
 
   char tempstr[10];
 
-  if(value.index == LABEL_DYNAMIC){
-    if (dynamic_value[i] < 1000.0f){
-      my_sprintf(tempstr, "%.2f",dynamic_value[i]);
+  if (value.index == LABEL_CUSTOM_VALUE) //show custom numeric value
+  {
+    if (dynamic_value[i] < 1000.0f)
+    {
+      my_sprintf(tempstr, "%.2f", dynamic_value[i]);
     }
-    else{
-      my_sprintf(tempstr, "%.1f",dynamic_value[i]);
+    else
+    {
+      my_sprintf(tempstr, "%.1f", dynamic_value[i]);
     }
-      GUI_DispStringInPrect(&rectVal,(u8*)tempstr);
+    GUI_DispStringInPrect(&rectVal, (u8 *)tempstr);
   }
-  else{
-    GUI_DispStringInPrect(&rectVal,textSelect(value.index));
+  else if (value.index == LABEL_DYNAMIC) //show custom text value
+  {
+
+    GUI_DispStringInPrect(&rectVal, (u8 *)getDynamicTextValue(i));
+  }
+  else //show regular text labels
+  {
+    GUI_DispStringInPrect(&rectVal, textSelect(value.index));
   }
 
   GUI_RestoreColorDefault();
