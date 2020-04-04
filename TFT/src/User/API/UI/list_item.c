@@ -414,7 +414,7 @@ void ListItem_Display(const GUI_RECT* rect, uint8_t position, const LISTITEM * c
       GUI_ClearPrect(rect);
 
       if(curitem->icon != ICONCHAR_BLANK) {
-        DrawCharIcon(rect,LEFT_CENTER,curitem->icon,BLACK);
+        DrawCharIcon(rect,LEFT_CENTER,curitem->icon,lcd_colors[infoSettings.bg_color]);
         pos.x += (BYTE_HEIGHT + 1);
        }
       textarea_width = LISTITEM_WIDTH - (pos.x + BYTE_HEIGHT + 2);  //width after removing the width for icon
@@ -430,7 +430,7 @@ void ListItem_Display(const GUI_RECT* rect, uint8_t position, const LISTITEM * c
 
     case LIST_CUSTOMVALUE:
       if(curitem->icon != ICONCHAR_BLANK) {
-        DrawCharIcon(rect,LEFT_CENTER,curitem->icon,BLACK);
+        DrawCharIcon(rect,LEFT_CENTER,curitem->icon,lcd_colors[infoSettings.bg_color]);
         pos.x += (BYTE_HEIGHT + 3);
       }
       GUI_ClearRect(pos.x, rect->y0, rect->x1 - BYTE_WIDTH*8 -1, rect->y1);        // clear only text area

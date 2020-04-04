@@ -352,42 +352,42 @@ void parseConfigKey(u16 index)
   switch (index)
   {
   case C_INDEX_UART_BAUDRATE:
-    if (inLimit(config_value(),0,ITEM_BAUDRATE_NUM))
+    if (inLimit(config_value(),0,ITEM_BAUDRATE_NUM-1))
       infoSettings.baudrate = item_baudrate[config_value()];
   break;
 
   case C_INDEX_LANGUAGE:
-    if (inLimit(config_value(), 0, LANGUAGE_NUM))
+    if (inLimit(config_value(), 0, LANGUAGE_NUM-1))
       infoSettings.language = config_value();
   break;
 
   case C_INDEX_TITLE_BG:
-    if (inLimit(config_value(), 0, LCD_COLOR_COUNT))
+    if (inLimit(config_value(), 0, LCD_COLOR_COUNT-1))
       infoSettings.title_bg_color = config_value();
   break;
 
   case C_INDEX_BG_COLOR:
-    if (inLimit(config_value(), 0, LCD_COLOR_COUNT))
+    if (inLimit(config_value(), 0, LCD_COLOR_COUNT-1))
       infoSettings.bg_color = config_value();
   break;
 
   case C_INDEX_FONT_COLOR:
-    if (inLimit(config_value(), 0, LCD_COLOR_COUNT))
+    if (inLimit(config_value(), 0, LCD_COLOR_COUNT-1))
       infoSettings.font_color = config_value();
   break;
 
   case C_INDEX_NOTIFY_COLOR:
-    if (inLimit(config_value(), 0, LCD_COLOR_COUNT))
+    if (inLimit(config_value(), 0, LCD_COLOR_COUNT-1))
       infoSettings.reminder_color = config_value();
   break;
 
   case C_INDEX_SD_NOTIFY_COLOR:
-    if (inLimit(config_value(), 0, LCD_COLOR_COUNT))
+    if (inLimit(config_value(), 0, LCD_COLOR_COUNT-1))
       infoSettings.sd_reminder_color = config_value();
   break;
 
   case C_INDEX_MODE:
-    if (inLimit(config_value(), 0, MODE_COUNT))
+    if (inLimit(config_value(), 0, MODE_COUNT-1))
       infoSettings.mode = config_value();
   break;
 
@@ -420,12 +420,12 @@ void parseConfigKey(u16 index)
   //---------------------------------------------------------Marlin Mode Settings (Only for TFT35_V3.0/TFT24_V1.1/TFT28V3.0)
 #ifdef ST7920_SPI
   case C_INDEX_MARLIN_BG_COLOR:
-    if (inLimit(config_value(), 0, LCD_COLOR_COUNT))
+    if (inLimit(config_value(), 0, LCD_COLOR_COUNT-1))
       infoSettings.marlin_mode_bg_color = config_value();
   break;
 
   case C_INDEX_MARLIN_FONT_COLOR:
-    if (inLimit(config_value(), 0, LCD_COLOR_COUNT))
+    if (inLimit(config_value(), 0, LCD_COLOR_COUNT-1))
       infoSettings.marlin_mode_font_color = config_value();
   break;
 
@@ -791,22 +791,22 @@ void parseConfigKey(u16 index)
 
 #ifdef LED_color_PIN
   case C_INDEX_KNOB_COLOR:
-    if (inLimit(config_value(), 0, LED_color_NUM))
+    if (inLimit(config_value(), 0, LED_color_NUM-1))
       infoSettings.knob_led_color = config_value();
   break;
 #endif
 
 #ifdef LCD_LED_PIN
   case C_INDEX_BRIGHTNESS:
-    if (inLimit(config_value(), 0, 100))
+    if (inLimit(config_value(), 0, ITEM_BRIGHTNESS_NUM-1))
       infoSettings.lcd_brightness = config_value();
   break;
   case C_INDEX_BRIGHTNESS_IDLE:
-    if (inLimit(config_value(), 0, 100))
+    if (inLimit(config_value(), 0, ITEM_BRIGHTNESS_NUM-1))
       infoSettings.lcd_idle_brightness = config_value();
   break;
   case C_INDEX_BRIGHTNESS_IDLE_DELAY:
-    if (inLimit(config_value(), 0, 100))
+    if (inLimit(config_value(), 0, ITEM_SECONDS_NUM-1))
       infoSettings.lcd_idle_timer = config_value();
   break;
 #endif
