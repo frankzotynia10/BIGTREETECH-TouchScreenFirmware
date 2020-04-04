@@ -23,11 +23,11 @@ Before Editing config.ini file please read the following points:
 
 ### Instructions:
 1. Open the **config.ini** File in any text editor like Notepad or Notepad++.
-    ![image1](images/config1.png)
+    ![image1](images/config2.png)
 
 
 2. Change the settings parameter values according to options provided in the **config.ini** file.
-    ![image2](images/config2.png)
+    ![image2](images/config1.png)
 
 
 3. Ignore / Leave the Keywords that are not supported by your TFT Variant. All unsupported Settings Keywords are skipped by the TFT.
