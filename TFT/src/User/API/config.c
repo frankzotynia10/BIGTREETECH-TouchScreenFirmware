@@ -351,6 +351,10 @@ void parseConfigKey(u16 index)
 
   switch (index)
   {
+  case C_INDEX_UNIFIEDMENU:
+      infoSettings.unified_menu = getOnOff();
+  break;
+
   case C_INDEX_UART_BAUDRATE:
     if (inLimit(config_value(),0,ITEM_BAUDRATE_NUM-1))
       infoSettings.baudrate = item_baudrate[config_value()];

@@ -23,6 +23,7 @@ void infoSettingsReset(void)
   infoSettings.baudrate             = BAUDRATE;
   infoSettings.language             = DEFAULT_LANGUAGE;
   infoSettings.mode                 = DEFAULT_LCD_MODE;
+  infoSettings.unified_menu         = UNIFIED_MENU;
   infoSettings.rotate_ui            = 0;
   infoSettings.bg_color             = BACKGROUND_COLOR;
   infoSettings.font_color           = FONT_COLOR;

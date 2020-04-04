@@ -243,7 +243,7 @@
 
 // Enable Unified Move Menu
 // Move, Home, Extrude, ABL at one Place and bring G-code Menu on Home Menu
-#define UNIFIED_MENU
+#define UNIFIED_MENU true //for unified menu: true | for classic menu: false
 
 /**
  * SD support

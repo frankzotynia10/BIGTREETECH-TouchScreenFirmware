@@ -38,6 +38,7 @@ typedef struct
   uint32_t baudrate;
   uint8_t  language;
   uint8_t  mode;
+  uint8_t  unified_menu;
   uint8_t  rotate_ui;
   uint8_t  bg_color;
   uint8_t  font_color;

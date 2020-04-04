@@ -9,6 +9,7 @@
 #define  LINE_MAX_CHAR 100
 #define CONFIG_FILE_PATH "0:config.ini"
 
+#define CONFIG_UNIFIEDMENU          "unified_menu:"
 #define CONFIG_UART_BAUDRATE        "baudrate:"
 #define CONFIG_LANGUAGE             "language:"
 #define CONFIG_TITLE_BG             "title_back_color:"
