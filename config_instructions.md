@@ -9,7 +9,7 @@ or
 
 ### Editing **config.ini** File:
 
-Before Editing config.ini file please read the following points:
+Before editing config.ini file please read the following points:
    - All the Settings Keywords are in small-caps (a-z) followed by the ' : ' colon sign.
    - If any Keyword has in-valid values then it will be skipped by the TFT Controller and the Keyword with in-valid values will be displayed on the screen during update.
    - Any text after the ' # ' hash sign will not be read by the TFT Controller and it will skip to next line.
