@@ -32,7 +32,7 @@ void infoSettingsReset(void)
   infoSettings.silent               = 0;
   infoSettings.terminalACK          = 0;
   infoSettings.move_speed           = 1;
-  infoSettings.knob_led_color       = (STARTUP_KNOB_LED_COLOR - 1);
+  infoSettings.knob_led_color       = STARTUP_KNOB_LED_COLOR;
   infoSettings.persistent_info      = 1;
   infoSettings.file_listmode        = 1;
 

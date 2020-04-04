@@ -31,22 +31,22 @@
 /**
  * Default LCD Brightness and LCD IDLE Brightness
  *
- * Brightness:  1: LCD_5_PERCENT,  2: LCD_10_PERCENT, 3: LCD_20_PERCENT,
- *              4: LCD_30_PERCENT, 5: LCD_40_PERCENT, 6: LCD_50_PERCENT,
- *              7: LCD_60_PERCENT, 8: LCD_70_PERCENT, 9: LCD_80_PERCENT,
- *              10: LCD_90_PERCENT, 11: LCD_100_PERCENT
+ * Brightness:  0: LCD_5_PERCENT,  1: LCD_10_PERCENT, 2: LCD_20_PERCENT,
+ *              3: LCD_30_PERCENT, 4: LCD_40_PERCENT, 5: LCD_50_PERCENT,
+ *              6: LCD_60_PERCENT, 7: LCD_70_PERCENT, 8: LCD_80_PERCENT,
+ *              9: LCD_90_PERCENT, 10: LCD_100_PERCENT
  *
  * Settings for the idle dim timer. The LCD screen will dim to idle brightness,
  * if the display is not touched for the period of the lcd idle timer.
  *
- * Idle Timer:  1: LCD_DIM_OFF,         2: LCD_DIM_5_SECONDS.   3: LCD_DIM_10_SECONDS,
- *              4: LCD_DIM_30_SECONDS,  4: LCD_DIM_60_SECONDS,  5: LCD_DIM_120_SECONDS,
+ * Idle Timer:  0: LCD_DIM_OFF,         1: LCD_DIM_5_SECONDS.   2: LCD_DIM_10_SECONDS,
+ *              3: LCD_DIM_30_SECONDS,  4: LCD_DIM_60_SECONDS,  5: LCD_DIM_120_SECONDS,
  *              6: LCD_DIM_300_SECONDS, 7: LCD_DIM_CUSTOM_SECONDS
  *
  */
-#define DEFAULT_LCD_BRIGHTNESS      11  // 11: LCD_100_PERCENT - Brightness value from list
+#define DEFAULT_LCD_BRIGHTNESS      10  // 10: LCD_100_PERCENT - Brightness value from list
 #define DEFAULT_LCD_IDLE_BRIGHTNESS 2   // 2: LCD_10_PERCENT - Brightness value from list
-#define DEFAULT_LCD_IDLE_TIMER      1   // 1: LCD_DIM_OFF
+#define DEFAULT_LCD_IDLE_TIMER      0   // 0: LCD_DIM_OFF
 #define LCD_DIM_CUSTOM_SECONDS      600 // Custom value in seconds. Will be used if
                                           // LCD_DIM_CUSTOM_SECONDS is set as idle timer.
 
