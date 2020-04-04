@@ -1,3 +1,3 @@
-### From version 25.4 the firmware for classic meu and Unified menu is merged.
+### From version 25.4 the firmware for classic Menu and Unified Menu is merged.
 
-**Now Classic Menu or Unified menu can be enabled using the config.ini file without the need to update the firmware**
+**Now Classic Menu or Unified Menu can be enabled using the config.ini file without the need to update the firmware**
