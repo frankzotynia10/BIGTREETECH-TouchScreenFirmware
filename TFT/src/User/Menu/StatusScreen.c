@@ -315,7 +315,6 @@ void menuStatus(void)
   GUI_FillPrect(&RecGantry);
   drawTemperature();
   drawStatusScreenMsg();
-
   while (infoMenu.menu[infoMenu.cur] == menuStatus)
   {
     if(infoHost.connected != lastConnection_status){

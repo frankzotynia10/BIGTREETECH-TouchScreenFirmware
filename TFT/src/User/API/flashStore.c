@@ -1,7 +1,6 @@
 #include "flashStore.h"
 #include "STM32_Flash.h"
 
-#define PARA_SIZE 512  //bytes
 #define TSC_SIGN  0x20190827 // DO NOT MODIFY
 #define PARA_SIGN 0x20200405 // (YYYMMDD) If a new setting parameter is added, modify here and initialize the initial value in the "infoSettingsReset()" function
 

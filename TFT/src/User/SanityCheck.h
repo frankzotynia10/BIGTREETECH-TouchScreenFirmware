@@ -2,6 +2,11 @@
 #define _SANITYCHECK_H_
 #include "includes.h"
 #include "Configuration.h"
+#include "flashStore.h"
+#include "Settings.h"
+//
+//check size of settings against max allocated size at compile time
+#define SIZE_CHECK(object) ((void)sizeof(char[1 - 2*!!(object)]))
 
 #if CONFIG_VERSION != CONFIG_SUPPPORT
  #error "the Configuration.h is old. please use the latest Configuration.h file"
@@ -37,9 +42,11 @@
 #endif
 #endif
 
+
 #ifndef ST7920_BANNER_TEXT
 #define ST7920_BANNER_TEXT "LCD12864 Simulator"
 #endif
+
 #ifdef CUSTOM_0_LABEL
     #define ENABLE_CUSTOM0 1
 #else
@@ -159,7 +166,6 @@
     #define CUSTOM_14_LABEL ""
     #define CUSTOM_14_GCODE ""
 #endif
-
 
 
 #define CUSTOM_GCODE_ENABLED {ENABLE_CUSTOM0, ENABLE_CUSTOM1, ENABLE_CUSTOM2, ENABLE_CUSTOM3, ENABLE_CUSTOM4,\

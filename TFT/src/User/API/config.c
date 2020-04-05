@@ -8,6 +8,7 @@
 #define PRINTDEBUG(x)
 #endif
 
+
 const GUI_POINT pointConfigTitle     = {2,2};
 const GUI_RECT  rectTitleline         = {0,               BYTE_HEIGHT+4,      LCD_WIDTH,                BYTE_HEIGHT+6};
 const GUI_RECT  recterror             = {BYTE_WIDTH/2-2,  BYTE_HEIGHT*2+2,    LCD_WIDTH-BYTE_WIDTH/2+2, LCD_HEIGHT-(BYTE_HEIGHT*4)-4};
@@ -209,7 +210,7 @@ int8_t getOnOff(void)
 
 void saveConfig(void)
 {
-  //uint8_t *data_a = (uint8_t *)configCustomGcodes;
+
   writeConfig((uint8_t *)configCustomGcodes, sizeof(CUSTOM_GCODES), CUSTOM_GCODE_ADDR, CUSTOM_GCODE_MAX_SIZE);
 
   writeConfig((uint8_t *)configPrintGcodes, sizeof(PRINT_GCODES), PRINT_GCODES_ADDR, PRINT_GCODES_MAX_SIZE);
@@ -234,6 +235,7 @@ void writeConfig(uint8_t* dataBytes, uint16_t numBytes, uint32_t addr, uint32_t 
   if (numBytes > maxSize)
     {
       PRINTDEBUG("\nwrite error\n");
+      showError(CSTAT_STORAGE_LOW);
       return;
     }
   int sectorCount =maxSize/W25QXX_SECTOR_SIZE;
@@ -318,6 +320,9 @@ void showError(CONFIG_STATS stat)
   GUI_SetBkColor(BLACK);
   GUI_ClearPrect(&recterrortxt);
   GUI_DrawPrect(&recterror);
+
+  char tempstr[50];
+
   switch (stat)
   {
   case CSTAT_INVALID_VALUE:
@@ -333,8 +338,13 @@ void showError(CONFIG_STATS stat)
   case CSTAT_FILE_NOTOPEN:
     GUI_SetColor(RED);
     ttl = "Error:";
-    char tempstr[50];
     my_sprintf(tempstr, "Unable to open %s", CONFIG_FILE_PATH);
+    txt = tempstr;
+    break;
+  case CSTAT_STORAGE_LOW:
+    GUI_SetColor(RED);
+    ttl = "Write Error:";
+    my_sprintf(tempstr, "Config size is larger than allocated size", CONFIG_FILE_PATH);
     txt = tempstr;
     break;
   case CSTAT_FILE_INVALID:
@@ -449,7 +459,7 @@ void parseConfigKey(u16 index)
     {
       char * pchr;
       pchr = strrchr(cur_line,':') + 1;
-      int len = strlen(pchr);
+      int len = getUTF8Length(pchr);
       if ( inLimit(len,3,MAX_STRING_LENGTH))
         strcpy(configStringsStore->marlin_title, pchr);
     }
@@ -696,12 +706,12 @@ void parseConfigKey(u16 index)
   case C_INDEX_PREHEAT_NAME_1:
   case C_INDEX_PREHEAT_NAME_2:
   case C_INDEX_PREHEAT_NAME_3:
-  case C_INDEX_PREHEAT_NAME_4:
   {
     char pchr[LINE_MAX_CHAR];
     strcpy(pchr, strrchr(cur_line, ':') + 1);
-    int len = strlen(pchr) + 1;
-    if (inLimit(len, NAME_MIN_LENGTH, MAX_LABEL_LENGTH))
+      int utf8len = getUTF8Length((u8*)pchr);
+      int bytelen = strlen(pchr) + 1;
+      if (inLimit(utf8len,NAME_MIN_LENGTH,MAX_STRING_LENGTH) && inLimit(bytelen,NAME_MIN_LENGTH,MAX_GCODE_LENGTH))
       strcpy(configStringsStore->preheat_name[index - C_INDEX_PREHEAT_NAME_1], pchr);
   }
 
@@ -710,7 +720,6 @@ void parseConfigKey(u16 index)
   case C_INDEX_PREHEAT_TEMP_1:
   case C_INDEX_PREHEAT_TEMP_2:
   case C_INDEX_PREHEAT_TEMP_3:
-  case C_INDEX_PREHEAT_TEMP_4:
     {
         int val_index = index - C_INDEX_PREHEAT_TEMP_1;
       if (key_seen("B:"))
@@ -841,8 +850,9 @@ void parseConfigKey(u16 index)
     {
       char pchr[LINE_MAX_CHAR];
       strcpy(pchr,strrchr(cur_line,':') + 1);
-      int len = strlen(pchr)+1;
-      if (inLimit(len,NAME_MIN_LENGTH,MAX_STRING_LENGTH))
+      int utf8len = getUTF8Length((u8*)pchr);
+      int bytelen = strlen(pchr) + 1;
+      if (inLimit(utf8len,NAME_MIN_LENGTH,MAX_GCODE_NAME_LENGTH) && inLimit(bytelen,NAME_MIN_LENGTH,MAX_GCODE_LENGTH))
       {
         strcpy(configCustomGcodes->name[customcode_index], pchr);
         customcode_index++;

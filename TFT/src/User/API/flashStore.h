@@ -6,6 +6,8 @@
 #include "Settings.h"
 #include "includes.h"
 
+#define PARA_SIZE 512  //bytes
+
 bool readStoredPara(void);
 void storePara(void);
 
