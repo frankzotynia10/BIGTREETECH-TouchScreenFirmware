@@ -204,9 +204,18 @@ void loopReminderClear(void)
 
   /* Clear warning message */
   reminder.status = STATUS_IDLE;
-  if(curMenuItems == NULL)
+  if (isListview)
+  {
+    if (curListItems == NULL)
     return;
-  menuDrawTitle(labelGetAddress(&curMenuItems->title));
+    menuDrawTitle(labelGetAddress(&curListItems->title));
+  }
+  else
+  {
+    if (curMenuItems == NULL)
+      return;
+    menuDrawTitle(labelGetAddress(&curMenuItems->title));
+  }
 }
 
 void loopVolumeReminderClear(void)
@@ -223,9 +232,19 @@ void loopVolumeReminderClear(void)
 
   /* Clear warning message */
   volumeReminder.status = STATUS_IDLE;
+  if(isListview)
+  {
+    if(curListItems == NULL)
+      return;
+    menuDrawTitle(labelGetAddress(&curListItems->title));
+  }
+  else
+  {
   if(curMenuItems == NULL)
     return;
   menuDrawTitle(labelGetAddress(&curMenuItems->title));
+  }
+
 }
 
 void loopBusySignClear(void)
