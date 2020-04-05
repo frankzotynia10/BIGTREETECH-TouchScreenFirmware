@@ -343,7 +343,7 @@ void menuStatus(void)
         infoMenu.menu[++infoMenu.cur] = menuSpeed;
         break;
       case KEY_ICON_4:
-        infoMenu.menu[++infoMenu.cur] = menuMain;
+        infoMenu.menu[++infoMenu.cur] = unifiedMenu;
         break;
       case KEY_ICON_7:
         infoMenu.menu[++infoMenu.cur] = menuPrint;

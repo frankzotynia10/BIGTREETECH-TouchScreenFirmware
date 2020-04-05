@@ -43,7 +43,7 @@ void infoMenuSelect(void)
       if(infoSettings.unified_menu == 1) //if Unified menu is selected
         infoMenu.menu[infoMenu.cur] = menuStatus; //status screen as default screen on boot
       else
-        infoMenu.menu[infoMenu.cur] = menuMain;   // classic UI
+        infoMenu.menu[infoMenu.cur] = classicMenu;   // classic UI
 
       #ifdef SHOW_BTT_BOOTSCREEN
         u32 startUpTime = OS_GetTimeMs();
