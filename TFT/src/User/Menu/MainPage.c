@@ -19,11 +19,12 @@ MENUITEMS unifiedPageItems = {
     {ICON_BACK,       LABEL_BACK}}
   };
 
-  menuDrawPage(&unifiedPageItems);
-
   KEY_VALUES key_num = KEY_IDLE;
   GUI_SetBkColor(infoSettings.bg_color);
-  while(infoMenu.menu[infoMenu.cur] == menuMain)
+
+  menuDrawPage(&unifiedPageItems);
+
+  while(infoMenu.menu[infoMenu.cur] == unifiedMenu)
   {
     key_num = menuKeyGetValue();
     switch(key_num)
@@ -40,8 +41,8 @@ MENUITEMS unifiedPageItems = {
       case KEY_ICON_7: infoMenu.cur--;        break;
       default:break;
     }
-    }
     loopProcess();
+    }
 }
 
 void classicMenu(void)
@@ -76,7 +77,7 @@ void classicMenu(void)
 
   menuDrawPage(&classicPageItems);
 
-  while(infoMenu.menu[infoMenu.cur] == menuMain)
+  while(infoMenu.menu[infoMenu.cur] == classicMenu)
   {
     key_num = menuKeyGetValue();
     switch(key_num)
@@ -100,12 +101,4 @@ void classicMenu(void)
     }
     loopProcess();
   }
-}
-
-void menuMain(void)
-{
-  if(infoSettings.unified_menu == 1)
-    unifiedMenu();
-  else
-    classicMenu();
 }
