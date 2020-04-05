@@ -527,7 +527,6 @@ void ListItem_DisplayCustomValue(const GUI_RECT* rect,LABEL value,int i)
   }
   else if (value.index == LABEL_DYNAMIC) //show custom text value
   {
-
     GUI_DispStringInPrect(&rectVal, (u8 *)getDynamicTextValue(i));
   }
   else //show regular text labels
