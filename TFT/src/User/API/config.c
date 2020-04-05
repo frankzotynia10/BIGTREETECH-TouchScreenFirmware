@@ -21,6 +21,7 @@ u16 foundkeys = 0;
 CONFIGFILE configFile;
 char cur_line[LINE_MAX_CHAR];
 int customcode_index = 0;
+int customcode_good[CUSTOM_GCODES_COUNT];
 bool scheduleRotate = false;
 
 static CUSTOM_GCODES* configCustomGcodes = NULL;
@@ -855,10 +856,13 @@ void parseConfigKey(u16 index)
       int bytelen = strlen(pchr) + 1;
       if (inLimit(utf8len,NAME_MIN_LENGTH,MAX_GCODE_NAME_LENGTH) && inLimit(bytelen,NAME_MIN_LENGTH,MAX_GCODE_LENGTH))
       {
-        strcpy(configCustomGcodes->name[customcode_index], pchr);
-        customcode_index++;
+        strcpy(configCustomGcodes->name[customcode_index++], pchr);
+        customcode_good[index - C_INDEX_CUSTOM_LABEL_1] = 1; //set name was found ok
       }
-
+      else
+      {
+        customcode_good[index - C_INDEX_CUSTOM_LABEL_1] = 0;//set name was not ok
+      }
   break;
     }
   case C_INDEX_CUSTOM_GCODE_1:
@@ -877,14 +881,18 @@ void parseConfigKey(u16 index)
   case C_INDEX_CUSTOM_GCODE_14:
   case C_INDEX_CUSTOM_GCODE_15:
     {
+      int fileindex = index - C_INDEX_CUSTOM_GCODE_1; //actual gcode index in config file
       char pchr[LINE_MAX_CHAR];
       strcpy(pchr,strrchr(cur_line,':') + 1);
       int len = strlen(pchr) + 1;
-      if (inLimit(len,GCODE_MIN_LENGTH,MAX_GCODE_LENGTH))
-      {
-        strcpy(configCustomGcodes->gcode[customcode_index], pchr);
-      }
-
+      if (inLimit(len,GCODE_MIN_LENGTH,MAX_GCODE_LENGTH) && (customcode_good[fileindex] == 1)) //check if gcode length is ok and the name was ok
+        {
+          strcpy(configCustomGcodes->gcode[customcode_index-1], pchr);
+        }
+      else if (customcode_good[fileindex] == 1) //if name was ok but gcode is not ok then reduce count
+        {
+          customcode_index--;
+        }
   break;
     }
   //---------------------------------------------------------Start, End & Cancel G-codes
