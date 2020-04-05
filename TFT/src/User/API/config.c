@@ -20,6 +20,7 @@ u16 foundkeys = 0;
 CONFIGFILE configFile;
 char cur_line[LINE_MAX_CHAR];
 int customcode_index = 0;
+bool scheduleRotate = false;
 
 static CUSTOM_GCODES* configCustomGcodes = NULL;
 PRINT_GCODES* configPrintGcodes  = NULL;
@@ -117,6 +118,11 @@ void getConfigFromFile(void)
 
     PRINTDEBUG("\ngcode stored at 1:");
     PRINTDEBUG(configCustomGcodes->gcode[1]);
+    if(scheduleRotate)
+    {
+      LCD_RefreshDirection();
+      TSC_Calibration();
+    }
     storePara();
     saveConfig();
     free(configCustomGcodes);
@@ -396,7 +402,9 @@ void parseConfigKey(u16 index)
   break;
 
   case C_INDEX_ROTATE_UI:
-      infoSettings.rotate_ui = getOnOff();
+      if (infoSettings.rotate_ui != getOnOff())
+          scheduleRotate = true;
+        infoSettings.rotate_ui = getOnOff();
     break;
 
   case C_INDEX_TERMINAL_ACK:
