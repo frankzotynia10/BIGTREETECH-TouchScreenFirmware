@@ -459,8 +459,9 @@ void parseConfigKey(u16 index)
     {
       char * pchr;
       pchr = strrchr(cur_line,':') + 1;
-      int len = getUTF8Length(pchr);
-      if ( inLimit(len,3,MAX_STRING_LENGTH))
+      int utf8len = getUTF8Length((u8*)pchr);
+      int bytelen = strlen(pchr) + 1;
+      if (inLimit(utf8len,NAME_MIN_LENGTH,MAX_STRING_LENGTH) && inLimit(bytelen,NAME_MIN_LENGTH,MAX_GCODE_LENGTH))
         strcpy(configStringsStore->marlin_title, pchr);
     }
   break;
