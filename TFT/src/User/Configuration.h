@@ -19,13 +19,13 @@
 /**
  * Default Startup Knob LED Color (TFT35 E3)
  *
- * Options:  1: LED_OFF,     2: LED_WHITE,   3: LED_RED,
- *           4: LED_ORANGE,  5: LED_YELLOW,  6: LED_GREEN,
- *           7: LED_BLUE,    8: LED_INDIGO,  9: LED_VIOLET
+ * Options:  0: LED_OFF,     1: LED_WHITE,   2: LED_RED,
+ *           3: LED_ORANGE,  4: LED_YELLOW,  5: LED_GREEN,
+ *           6: LED_BLUE,    7: LED_INDIGO,  8: LED_VIOLET
  *
  * Default value is: 1 for LED_OFF
 */
-#define STARTUP_KNOB_LED_COLOR 1         // LED_OFF
+#define STARTUP_KNOB_LED_COLOR 0         // LED_OFF
 #define KEEP_KNOB_LED_COLOR_MARLIN_MODE  // Keeps the LED state in Marlin Mode
 
 /**

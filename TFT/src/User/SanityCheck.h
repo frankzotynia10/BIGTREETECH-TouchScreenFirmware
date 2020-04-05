@@ -20,18 +20,18 @@
 
 #ifdef LED_color_PIN
   #ifdef STARTUP_KNOB_LED_COLOR
-    #if STARTUP_KNOB_LED_COLOR < 1
+    #if STARTUP_KNOB_LED_COLOR < 0
     #error "STARTUP_knob_LED_COLOR cannot be less than 1"
     #endif
 
-    #if STARTUP_KNOB_LED_COLOR > 9
+    #if STARTUP_KNOB_LED_COLOR > 8
     #error "STARTUP_knob_LED_COLOR cannot be greater than 9"
     #endif
   #else
-  #define STARTUP_KNOB_LED_COLOR 1
+  #define STARTUP_KNOB_LED_COLOR 0
   #endif
   #else
-  #define STARTUP_KNOB_LED_COLOR 1
+  #define STARTUP_KNOB_LED_COLOR 0
 #endif
 
 #ifdef EXTRUDE_STEPS
