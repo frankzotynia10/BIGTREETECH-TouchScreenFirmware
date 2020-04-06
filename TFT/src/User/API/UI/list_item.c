@@ -358,7 +358,7 @@ void DrawListItemPress(const GUI_RECT * rect, bool pressed){
         GUI_SetColor(lcd_colors[infoSettings.bg_color]);
         GUI_DrawPrect(rect);
 
-        GUI_SetColor(LISTBTN_BKCOLOR);
+        GUI_SetColor(lcd_colors[infoSettings.list_border_color]);
         GUI_DrawLine(rect->x0, rect->y0-1 , rect->x1-1, rect->y0-1 );
         GUI_DrawLine(rect->x0, rect->y1-1 , rect->x1-1, rect->y1-1 );
       }
@@ -370,7 +370,7 @@ void ListItem_Display(const GUI_RECT* rect, uint8_t position, const LISTITEM * c
   //draw navigation icons
   if(position >= LISTITEM_PER_PAGE){
     if(curitem->icon != ICONCHAR_BACKGROUND){
-      DrawCharIcon(rect,MIDDLE,curitem->icon,LISTBTN_BKCOLOR);
+      DrawCharIcon(rect,MIDDLE,curitem->icon,lcd_colors[infoSettings.list_button_color]);
       if (pressed != false){
         GUI_DrawPrect(rect);
       }

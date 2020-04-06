@@ -146,6 +146,9 @@
 #define FONT_COLOR                  0  // Font foreground color
 #define REMINDER_FONT_COLOR         2    // Reminder font color, such as: "No print attached", "Busy processing", etc.
 #define VOLUME_REMINDER_FONT_COLOR  5  // Volume reminder font color, such as: "Card inserted", "Card removed"
+#define STATUS_XYZ_BG_COLOR         15 // Backgroud color for X Y Z positon display in Status Screen.
+#define LISTVIEW_BORDER_COLOR       15 //Border color in List view
+#define LISTVIEW_ICON_COLOR         15 //icon color in List view
 
 #define TOOL_NUM     1    // set in 1~6
 #define EXTRUDER_NUM 1    // set in 1~6

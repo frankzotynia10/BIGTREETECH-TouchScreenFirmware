@@ -12,11 +12,16 @@
 #define CONFIG_UNIFIEDMENU          "unified_menu:"
 #define CONFIG_UART_BAUDRATE        "baudrate:"
 #define CONFIG_LANGUAGE             "language:"
+
 #define CONFIG_TITLE_BG             "title_back_color:"
-#define CONFIG_BG_COLOR             "background_color:"
-#define CONFIG_FONT_COLOR           "font_color:"
+#define CONFIG_MENU_BG_COLOR        "background_color:"
+#define CONFIG_MENU_FONT_COLOR      "font_color:"
 #define CONFIG_NOTIFY_COLOR         "reminder_color:"
 #define CONFIG_SD_NOTIFY_COLOR      "volume_reminder_color:"
+#define CONFIG_SS_XYZ_BG_COLOR      "status_xyz_bg_color:"
+#define CONFIG_LIST_BORDER_COLOR    "list_border_color:"
+#define CONFIG_LIST_BUTTON_BG_COLOR "list_button_bg_color:"
+
 #define CONFIG_ROTATE_UI            "rotate_ui:"
 #define CONFIG_TERMINAL_ACK         "terminal_ack:"
 #define CONFIG_INVERT_AXIS          "invert_axis:"

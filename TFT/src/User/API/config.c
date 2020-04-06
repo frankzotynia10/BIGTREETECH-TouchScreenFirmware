@@ -387,12 +387,12 @@ void parseConfigKey(u16 index)
       infoSettings.title_bg_color = config_value();
   break;
 
-  case C_INDEX_BG_COLOR:
+  case C_INDEX_MENU_BG_COLOR:
     if (inLimit(config_value(), 0, LCD_COLOR_COUNT-1))
       infoSettings.bg_color = config_value();
   break;
 
-  case C_INDEX_FONT_COLOR:
+  case C_INDEX_MENU_FONT_COLOR:
     if (inLimit(config_value(), 0, LCD_COLOR_COUNT-1))
       infoSettings.font_color = config_value();
   break;
@@ -405,6 +405,21 @@ void parseConfigKey(u16 index)
   case C_INDEX_SD_NOTIFY_COLOR:
     if (inLimit(config_value(), 0, LCD_COLOR_COUNT-1))
       infoSettings.sd_reminder_color = config_value();
+  break;
+
+  case C_INDEX_SS_XYZ_BG_COLOR:
+    if (inLimit(config_value(), 0, LCD_COLOR_COUNT-1))
+      infoSettings.status_xyz_bg_color = config_value();
+  break;
+
+  case C_INDEX_LIST_BORDER_COLOR:
+    if (inLimit(config_value(), 0, LCD_COLOR_COUNT-1))
+      infoSettings.list_border_color = config_value();
+  break;
+
+  case C_INDEX_LIST_BUTTON_BG_COLOR:
+    if (inLimit(config_value(), 0, LCD_COLOR_COUNT-1))
+      infoSettings.list_button_color = config_value();
   break;
 
   case C_INDEX_MODE:

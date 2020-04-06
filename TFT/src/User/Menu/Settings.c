@@ -25,11 +25,16 @@ void infoSettingsReset(void)
   infoSettings.mode                 = DEFAULT_LCD_MODE;
   infoSettings.unified_menu         = UNIFIED_MENU;
   infoSettings.rotate_ui            = 0;
+
   infoSettings.bg_color             = BACKGROUND_COLOR;
   infoSettings.font_color           = FONT_COLOR;
   infoSettings.title_bg_color       = TITLE_BACKGROUND_COLOR;
   infoSettings.reminder_color       = REMINDER_FONT_COLOR;
   infoSettings.sd_reminder_color    = VOLUME_REMINDER_FONT_COLOR;
+  infoSettings.status_xyz_bg_color  = STATUS_XYZ_BG_COLOR;
+  infoSettings.list_border_color    = LISTVIEW_BORDER_COLOR;
+  infoSettings.list_button_color    = LISTVIEW_ICON_COLOR;
+
   infoSettings.silent               = 0;
   infoSettings.terminalACK          = 0;
   infoSettings.move_speed           = 1;
