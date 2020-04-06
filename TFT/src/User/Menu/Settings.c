@@ -118,7 +118,7 @@ void infoSettingsReset(void)
     infoSettings.pause_feedrate[i]    = default_pause_speed[i]; // X, Y, Z, E
   }
 
-  infoSettings.level_edge             = 20;
+  infoSettings.level_edge             = LEVELING_EDGE_DISTANCE;
   infoSettings.level_z_pos            = LEVELING_POINT_Z;
   infoSettings.level_z_raise          = LEVELING_POINT_MOVE_Z;
 
