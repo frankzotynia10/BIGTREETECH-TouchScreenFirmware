@@ -7,6 +7,7 @@
 #include "includes.h"
 
 #define PARA_SIZE 512  //bytes
+extern bool wasRestored;
 
 bool readStoredPara(void);
 void storePara(void);

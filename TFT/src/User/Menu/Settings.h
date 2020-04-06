@@ -2,8 +2,7 @@
 #define _SETTINGS_H_
 
 #include "stdint.h"
-#include "coordinate.h"
-#include "Configuration.h"
+#include "includes.h"
 
 #define CONFIG_SUPPPORT 200404
 
