@@ -62,17 +62,18 @@ typedef enum
   SKEY_ENDGCODE,
   SKEY_PERSISTENTINFO,
   SKEY_FILELIST,
-  #ifdef LED_color_PIN
-  SKEY_KNOB,
+  #ifdef LED_COLOR_PIN
+    SKEY_KNOB,
   #endif
-  #ifdef LCD_LED_PIN
-  SKEY_LCD_BRIGHTNESS,
-  SKEY_LCD_BRIGTHNESS_DIM,
-  SKEY_LCD_DIM_IDLE_TIMER,
+  #ifdef LCD_LED_PWM_CHANNEL
+    SKEY_LCD_BRIGHTNESS,
+    SKEY_LCD_BRIGTHNESS_DIM,
+    SKEY_LCD_DIM_IDLE_TIMER,
   #endif
   #ifdef ST7920_SPI
-  SKEY_ST7920_FULLSCREEN,
+    SKEY_ST7920_FULLSCREEN,
   #endif
+  
   SKEY_RESET_SETTINGS, // Keep reset always at the bottom of the settings menu list.
   SKEY_COUNT //keep this always at the end
 }SKEY_LIST;
@@ -89,26 +90,26 @@ LISTITEM settingPage[SKEY_COUNT] = {
   {ICONCHAR_TOGGLE_ON,  LIST_TOGGLE,        LABEL_INVERT_YAXIS,             LABEL_BACKGROUND  },
   {ICONCHAR_TOGGLE_ON,  LIST_TOGGLE,        LABEL_INVERT_ZAXIS,             LABEL_BACKGROUND  },
   #ifdef PS_ON_PIN
-  {ICONCHAR_TOGGLE_ON,  LIST_TOGGLE,        LABEL_AUTO_SHUT_DOWN,           LABEL_BACKGROUND  },
+    {ICONCHAR_TOGGLE_ON,  LIST_TOGGLE,        LABEL_AUTO_SHUT_DOWN,           LABEL_BACKGROUND  },
   #endif
   #ifdef FIL_RUNOUT_PIN
-  {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_FILAMENT_SENSOR,          LABEL_OFF         },
+    {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_FILAMENT_SENSOR,          LABEL_OFF         },
   #endif
   {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_MOVE_SPEED,               LABEL_NORMAL_SPEED},
   {ICONCHAR_TOGGLE_ON,  LIST_TOGGLE,        LABEL_SEND_START_GCODE,         LABEL_BACKGROUND  },
   {ICONCHAR_TOGGLE_ON,  LIST_TOGGLE,        LABEL_SEND_END_GCODE,           LABEL_BACKGROUND  },
   {ICONCHAR_TOGGLE_ON,  LIST_TOGGLE,        LABEL_PERSISTENT_STATUS_INFO,   LABEL_BACKGROUND  },
   {ICONCHAR_TOGGLE_ON,  LIST_TOGGLE,        LABEL_FILE_LISTMODE,            LABEL_BACKGROUND  },
-  #ifdef LED_color_PIN
-  {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_KNOB_LED,                 LABEL_OFF         },
+  #ifdef LED_COLOR_PIN
+    {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_KNOB_LED,                 LABEL_OFF         },
   #endif
-  #ifdef LCD_LED_PIN
-  {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_LCD_BRIGHTNESS,           LABEL_DYNAMIC },
-  {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_LCD_BRIGHTNESS_DIM,       LABEL_DYNAMIC },
-  {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_LCD_DIM_IDLE_TIMER,       LABEL_DYNAMIC },
+  #ifdef LCD_LED_PWM_CHANNEL
+    {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_LCD_BRIGHTNESS,           LABEL_DYNAMIC },
+    {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_LCD_BRIGHTNESS_DIM,       LABEL_DYNAMIC },
+    {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_LCD_DIM_IDLE_TIMER,       LABEL_60_SECONDS  },
   #endif
   #ifdef ST7920_SPI
-  {ICONCHAR_BLANK,      LIST_TOGGLE,        LABEL_ST7920_FULLSCREEN,        LABEL_OFF         },
+    {ICONCHAR_BLANK,      LIST_TOGGLE,        LABEL_ST7920_FULLSCREEN,        LABEL_OFF         },
   #endif
   {ICONCHAR_BLANK,      LIST_CUSTOMVALUE,   LABEL_SETTINGS,                 LABEL_RESET       }   // Keep reset always at the bottom of the settings menu list.
 };
@@ -188,13 +189,13 @@ void updateFeatureSettings(uint8_t key_val)
     #endif
 
     #ifdef FIL_RUNOUT_PIN
-    case SKEY_RUNOUT:
-      infoSettings.runout = (infoSettings.runout + 1) % ITEM_RUNOUT_NUM;
-      settingPage[item_index].valueLabel = itemRunout[infoSettings.runout];
-      featureSettingsItems.items[key_val] = settingPage[item_index];
+      case SKEY_RUNOUT:
+        infoSettings.runout = (infoSettings.runout + 1) % ITEM_RUNOUT_NUM;
+        settingPage[item_index].valueLabel = itemRunout[infoSettings.runout];
+        featureSettingsItems.items[key_val] = settingPage[item_index];
 
-      menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
-      break;
+        menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
+        break;
     #endif
 
     case SKEY_SPEED:
@@ -237,15 +238,15 @@ void updateFeatureSettings(uint8_t key_val)
       menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
       break;
 
-    #ifdef LED_color_PIN
-    case SKEY_KNOB:
-      infoSettings.knob_led_color = (infoSettings.knob_led_color + 1 ) % LED_color_NUM;
-      settingPage[item_index].valueLabel = itemLedcolor[infoSettings.knob_led_color];
-      featureSettingsItems.items[key_val] = settingPage[item_index];
-      ws2812_send_DAT(led_color[infoSettings.knob_led_color]);
+    #ifdef LED_COLOR_PIN
+      case SKEY_KNOB:
+        infoSettings.knob_led_color = (infoSettings.knob_led_color + 1 ) % LED_color_NUM;
+        settingPage[item_index].valueLabel = itemLedcolor[infoSettings.knob_led_color];
+        featureSettingsItems.items[key_val] = settingPage[item_index];
+        ws2812_send_DAT(led_color[infoSettings.knob_led_color]);
 
-      menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
-      break;
+        menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
+        break;
     #endif
 
     case SKEY_RESET_SETTINGS:
@@ -254,47 +255,48 @@ void updateFeatureSettings(uint8_t key_val)
       menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
       break;
 
-    #ifdef LCD_LED_PIN
-    case SKEY_LCD_BRIGHTNESS:
+    #ifdef LCD_LED_PWM_CHANNEL
+      case SKEY_LCD_BRIGHTNESS:
       {
-      infoSettings.lcd_brightness = (infoSettings.lcd_brightness + 1) % ITEM_BRIGHTNESS_NUM;
-      char tempstr[8];
-      my_sprintf(tempstr,(char *)textSelect(LABEL_PERCENT_VALUE),infoSettings.lcd_idle_brightness);
-      setDynamicTextValue(key_val,tempstr);
-      Set_LCD_Brightness(LCD_BRIGHTNESS[infoSettings.lcd_brightness]);
-      menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
+        infoSettings.lcd_brightness = (infoSettings.lcd_brightness + 1) % ITEM_BRIGHTNESS_NUM;
+        char tempstr[8];
+        my_sprintf(tempstr,(char *)textSelect(LABEL_PERCENT_VALUE),infoSettings.lcd_idle_brightness);
+        setDynamicTextValue(key_val,tempstr);
+        Set_LCD_Brightness(LCD_BRIGHTNESS[infoSettings.lcd_brightness]);
+        menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
       }
-      break;
+        break;
 
-    case SKEY_LCD_BRIGTHNESS_DIM:
+      case SKEY_LCD_BRIGTHNESS_DIM:
       {
-      infoSettings.lcd_idle_brightness = (infoSettings.lcd_idle_brightness + 1) % ITEM_BRIGHTNESS_NUM;
-      char tempstr[8];
-      my_sprintf(tempstr,(char *)textSelect(LABEL_PERCENT_VALUE),infoSettings.lcd_idle_brightness);
-      setDynamicTextValue(key_val,tempstr);
+        infoSettings.lcd_idle_brightness = (infoSettings.lcd_idle_brightness + 1) % ITEM_BRIGHTNESS_NUM;
+        char tempstr[8];
+        my_sprintf(tempstr,(char *)textSelect(LABEL_PERCENT_VALUE),infoSettings.lcd_idle_brightness);
+        setDynamicTextValue(key_val,tempstr);
 
-      menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
+        menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
       }
-      break;
+        break;
 
-    case SKEY_LCD_DIM_IDLE_TIMER:
-      infoSettings.lcd_idle_timer = (infoSettings.lcd_idle_timer + 1) % ITEM_SECONDS_NUM;
-      settingPage[item_index].valueLabel = itemDimTime[infoSettings.lcd_idle_timer];
-      featureSettingsItems.items[key_val] = settingPage[item_index];
+      case SKEY_LCD_DIM_IDLE_TIMER:
+        infoSettings.lcd_idle_timer = (infoSettings.lcd_idle_timer + 1) % ITEM_SECONDS_NUM;
+        settingPage[item_index].valueLabel = itemDimTime[infoSettings.lcd_idle_timer];
+        featureSettingsItems.items[key_val] = settingPage[item_index];
 
-      menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
-      break;
-    #endif //LCD_LED_PIN
+        menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
+        break;
+    #endif //LCD_LED_PWM_CHANNEL
 
     #ifdef ST7920_SPI
-    case SKEY_ST7920_FULLSCREEN:
-      infoSettings.marlin_mode_fullscreen = (infoSettings.marlin_mode_fullscreen + 1) % TOGGLE_NUM;
-      settingPage[item_index].icon = toggleitem[infoSettings.marlin_mode_fullscreen];
-      featureSettingsItems.items[key_val] = settingPage[item_index];
+      case SKEY_ST7920_FULLSCREEN:
+        infoSettings.marlin_mode_fullscreen = (infoSettings.marlin_mode_fullscreen + 1) % TOGGLE_NUM;
+        settingPage[item_index].icon = toggleitem[infoSettings.marlin_mode_fullscreen];
+        featureSettingsItems.items[key_val] = settingPage[item_index];
 
-      menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
-      break;
+        menuDrawListItem(&featureSettingsItems.items[key_val], key_val);
+        break;
     #endif
+
     default:
       break;
   }
@@ -370,42 +372,43 @@ void loadFeatureSettings(){
       case SKEY_RESET_SETTINGS:
         featureSettingsItems.items[i] = settingPage[item_index];
         break;
-      #ifdef LED_color_PIN
-      case SKEY_KNOB:
-        settingPage[item_index].valueLabel = itemLedcolor[infoSettings.knob_led_color];
-        featureSettingsItems.items[i] = settingPage[item_index];
-        break;
+      #ifdef LED_COLOR_PIN
+        case SKEY_KNOB:
+          settingPage[item_index].valueLabel = itemLedcolor[infoSettings.knob_led_color];
+          featureSettingsItems.items[i] = settingPage[item_index];
+          break;
       #endif
-      #ifdef LCD_LED_PIN
-      case SKEY_LCD_BRIGHTNESS:
-        {
-        char tempstr[8];
-        my_sprintf(tempstr,(char *)textSelect(LABEL_PERCENT_VALUE),infoSettings.lcd_idle_brightness);
-        setDynamicTextValue(i,tempstr);
-        featureSettingsItems.items[i] = settingPage[item_index];
-        }
-        break;
+      #ifdef LCD_LED_PWM_CHANNEL
+        case SKEY_LCD_BRIGHTNESS:
+          {
+          char tempstr[8];
+          my_sprintf(tempstr,(char *)textSelect(LABEL_PERCENT_VALUE),infoSettings.lcd_idle_brightness);
+          setDynamicTextValue(i,tempstr);
+          featureSettingsItems.items[i] = settingPage[item_index];
+          }
+          break;
 
-      case SKEY_LCD_BRIGTHNESS_DIM:
-        {
-        char tempstr[8];
-        my_sprintf(tempstr,(char *)textSelect(LABEL_PERCENT_VALUE),infoSettings.lcd_idle_brightness);
-        setDynamicTextValue(i,tempstr);
-        featureSettingsItems.items[i] = settingPage[item_index];
-        break;
-      case SKEY_LCD_DIM_IDLE_TIMER:
-        settingPage[item_index].valueLabel = itemDimTime[infoSettings.lcd_idle_timer];
-        featureSettingsItems.items[i] = settingPage[item_index];
-        }
-        break;
-      #endif //LCD_LED_PIN
+        case SKEY_LCD_BRIGTHNESS_DIM:
+          {
+          char tempstr[8];
+          my_sprintf(tempstr,(char *)textSelect(LABEL_PERCENT_VALUE),infoSettings.lcd_idle_brightness);
+          setDynamicTextValue(i,tempstr);
+          featureSettingsItems.items[i] = settingPage[item_index];
+          }
+          break;
+        case SKEY_LCD_DIM_IDLE_TIMER:
+          settingPage[item_index].valueLabel = itemDimTime[infoSettings.lcd_idle_timer];
+          featureSettingsItems.items[i] = settingPage[item_index];
+          break;
+      #endif //LCD_LED_PWM_CHANNEL
 
       #ifdef ST7920_SPI
-      case SKEY_ST7920_FULLSCREEN:
-        settingPage[item_index].icon  = toggleitem[infoSettings.marlin_mode_fullscreen];
-        featureSettingsItems.items[i] = settingPage[item_index];
-        break;
+        case SKEY_ST7920_FULLSCREEN:
+          settingPage[item_index].icon  = toggleitem[infoSettings.marlin_mode_fullscreen];
+          featureSettingsItems.items[i] = settingPage[item_index];
+          break;
       #endif
+
       default:
         featureSettingsItems.items[i].icon = ICONCHAR_BACKGROUND;
       break;

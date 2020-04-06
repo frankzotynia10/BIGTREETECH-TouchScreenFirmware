@@ -7,7 +7,7 @@ void Hardware_GenericInit(void)
 {
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
   Delay_init(F_CPUM);
-  OS_TimerInit(999, F_CPUM-1);  // System clock timer, cycle 1ms
+  OS_TimerInit(1000-1, F_CPUM-1);  // System clock timer, cycle 1ms
 
   #ifdef DISABLE_JTAG
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
@@ -46,10 +46,10 @@ void Hardware_GenericInit(void)
     FIL_Runout_Init();
   #endif
 
-  #ifdef LED_color_PIN
+  #ifdef LED_COLOR_PIN
     knob_LED_Init();
   #endif
-  
+
   #ifdef U_DISK_SUPPORT
     USBH_Init(&USB_OTG_Core, USB_OTG_FS_CORE_ID, &USB_Host, &USBH_MSC_cb, &USR_cb);
   #endif
@@ -59,13 +59,14 @@ void Hardware_GenericInit(void)
     TSC_Calibration();
     storePara();
   }
+
   printSetUpdateWaiting(infoSettings.m27_active);
-  #ifdef LCD_LED_PIN
-  Set_LCD_Brightness(LCD_BRIGHTNESS[infoSettings.lcd_brightness]);
+
+  #ifdef LCD_LED_PWM_CHANNEL
+    Set_LCD_Brightness(LCD_BRIGHTNESS[infoSettings.lcd_brightness]);
   #endif
   GUI_RestoreColorDefault();
   infoMenuSelect();
-
 }
 
 int main(void)
