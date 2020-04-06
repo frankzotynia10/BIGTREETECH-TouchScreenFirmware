@@ -310,7 +310,7 @@ void menuStatus(void)
   GUI_SetBkColor(lcd_colors[infoSettings.bg_color]);
   //set_status_icon();
   menuDrawPage(&StatusItems);
-  GUI_SetColor(GANTRYLBL_BKCOLOR);
+  GUI_SetColor(lcd_colors[infoSettings.status_xyz_bg_color]);
       //GUI_ClearPrect(&RecGantry);
   GUI_FillPrect(&RecGantry);
   drawTemperature();

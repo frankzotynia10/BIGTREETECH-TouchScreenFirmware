@@ -372,12 +372,14 @@ void ListItem_Display(const GUI_RECT* rect, uint8_t position, const LISTITEM * c
     if(curitem->icon != ICONCHAR_BACKGROUND){
       DrawCharIcon(rect,MIDDLE,curitem->icon,lcd_colors[infoSettings.list_button_color]);
       if (pressed != false){
+        GUI_SetColor(WHITE);
         GUI_DrawPrect(rect);
       }
     }
     else{
       GUI_ClearPrect(rect);
     }
+      GUI_RestoreColorDefault();
   }
   //draw list tiems
   else if (curitem->icon != ICONCHAR_BACKGROUND){
@@ -477,7 +479,7 @@ void ListItem_DisplayToggle(uint16_t sx, uint16_t sy, uint8_t iconchar_state)
 
   //GUI_ClearPrect(&rect_item);
   GUI_SetTextMode(GUI_TEXTMODE_NORMAL);
-  GUI_SetColor(LISTBTN_BKCOLOR);
+  GUI_SetColor(lcd_colors[infoSettings.list_border_color]);
   GUI_DispString(sx, sy, (uint8_t*)GET_ICONCHAR[ICONCHAR_TOGGLE_BODY]);
   GUI_SetTextMode(GUI_TEXTMODE_TRANS);
 
@@ -505,7 +507,7 @@ void ListItem_DisplayCustomValue(const GUI_RECT* rect,LABEL value,int i)
   GUI_ClearPrect(&rectVal);
   GUI_SetTextMode(GUI_TEXTMODE_NORMAL);
 
-  GUI_SetColor(LISTBTN_BKCOLOR);
+  GUI_SetColor(lcd_colors[infoSettings.bg_color]);
 
   GUI_DrawPrect(&rectVal);
   GUI_SetTextMode(GUI_TEXTMODE_TRANS);

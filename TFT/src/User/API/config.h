@@ -17,7 +17,7 @@
 #define CONFIG_MENU_BG_COLOR        "background_color:"
 #define CONFIG_MENU_FONT_COLOR      "font_color:"
 #define CONFIG_NOTIFY_COLOR         "reminder_color:"
-#define CONFIG_SD_NOTIFY_COLOR      "volume_reminder_color:"
+#define CONFIG_SD_NOTIFY_COLOR      "volume_status_color:"
 #define CONFIG_SS_XYZ_BG_COLOR      "status_xyz_bg_color:"
 #define CONFIG_LIST_BORDER_COLOR    "list_border_color:"
 #define CONFIG_LIST_BUTTON_BG_COLOR "list_button_bg_color:"
@@ -137,7 +137,6 @@
 #define GCODE_MIN_LENGTH          3         // gcode length less than this will not pe parsed.
 #define MIN_SIZE_LIMIT            0        // machine size less than this will not be parsed.
 #define MIN_POS_LIMIT             0         // position value less than this will not be parsed.
-#define MAX_EXT_SPEED_LIMIT       5000      // Extruder speed less than this will not pe parsed.
 #define MIN_TOOL_TEMP             20        // extruder temp less than this will not pe parsed.
 #define MIN_BED_TEMP              20        // bed temp less than this will not pe parsed.
 #define MIN_RUNOUT_DISTANCE       1         // runout distance less than this will not be parsed.

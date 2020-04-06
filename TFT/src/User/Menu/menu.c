@@ -281,7 +281,7 @@ void menuDrawTitle(const uint8_t *content) //(const MENUITEMS * menuItems)
 
   show_GlobalInfo();
   if(reminder.status == STATUS_IDLE) return;
-  GUI_SetColor(RED);
+  GUI_SetColor(lcd_colors[infoSettings.reminder_color]);
   GUI_DispStringInPrect(&reminder.rect, textSelect(reminder.inf));
   GUI_SetColor(lcd_colors[infoSettings.font_color]);
 }
