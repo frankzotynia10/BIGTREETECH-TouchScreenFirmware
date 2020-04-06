@@ -113,7 +113,7 @@ bool readStoredPara(void)
   infoSettings.m27_refresh_time     = byteToWord(data + (index += 4), 4);
   infoSettings.m27_active           = byteToWord(data + (index += 4), 4);
 
-  for(int i = 0; i < HEATER_NUM; i++)
+  for(int i = 0; i < HEAT_NUM; i++)
   {
     infoSettings.max_temp[i]          = byteToWord(data + (index += 4), 4);
   }
@@ -237,7 +237,7 @@ void storePara(void)
   wordToByte(infoSettings.m27_refresh_time,           data + (index += 4));
   wordToByte(infoSettings.m27_active,                 data + (index += 4));
 
-  for(int i = 0; i < HEATER_NUM; i++)
+  for(int i = 0; i < HEAT_NUM; i++)
   {
     wordToByte(infoSettings.max_temp[i],              data + (index += 4));
   }

@@ -9,6 +9,7 @@
 //check size of settings against max allocated size at compile time
 #define SIZE_CHECK(object) ((void)sizeof(char[1 - 2*!!(object)]))
 
+
 #if CONFIG_VERSION != CONFIG_SUPPPORT
     #error "the Configuration.h is old. please use the latest Configuration.h file"
 #endif
@@ -49,6 +50,18 @@
 
 #ifndef ST7920_BANNER_TEXT
     #define ST7920_BANNER_TEXT "LCD12864 Simulator"
+#endif
+
+#if TOOL_NUM > MAX_TOOL_COUNT
+    #error "TOOL_NUM can not be more than 6"
+#endif
+
+#if EXT_NUM > MAX_TOOL_COUNT
+    #error "EXT_NUM can not be more than 6"
+#endif
+
+#if FAN_NUM > MAX_TOOL_COUNT
+    #error "FAN_NUM can not be more than 6"
 #endif
 
 #ifdef CUSTOM_0_LABEL

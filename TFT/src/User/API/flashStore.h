@@ -4,7 +4,6 @@
 #include "stdbool.h"
 #include "variants.h"
 #include "Settings.h"
-#include "includes.h"
 
 #define PARA_SIZE 512  //bytes
 extern bool wasRestored;
