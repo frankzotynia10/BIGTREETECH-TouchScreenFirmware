@@ -151,7 +151,6 @@ static char key_seen(const char *keyStr)
     if (keyStr[i] == 0)
     {
       c_index += i;
-      foundkeys++;
       return true;
     }
   }
@@ -194,6 +193,7 @@ void parseConfigLine(void)
       PRINTDEBUG("\n");
       PRINTDEBUG((char*)config_keywords[i]);
       parseConfigKey(i);
+      foundkeys++;
       return;
     }
   }
