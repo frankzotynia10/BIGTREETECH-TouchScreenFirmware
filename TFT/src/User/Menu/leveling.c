@@ -82,7 +82,9 @@ void moveToLevelingPoint(u8 point)
     {infoSettings.machine_size_min[X_AXIS] + infoSettings.level_edge, infoSettings.machine_size_max[Y_AXIS] - infoSettings.level_edge},
   };
 
-  if(coordinateIsClear() == false)
+
+  if(coordinateIsKnown() == false)
+
   {
     storeCmd("G28\n");
   }
