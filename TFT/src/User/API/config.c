@@ -827,14 +827,14 @@ void parseConfigKey(u16 index)
     break;
 #endif
 
-#ifdef LED_color_PIN
+#ifdef LED_COLOR_PIN
   case C_INDEX_KNOB_COLOR:
     if (inLimit(config_value(), 0, LED_color_NUM-1))
       infoSettings.knob_led_color = config_value();
   break;
 #endif
 
-#ifdef LCD_LED_PIN
+#ifdef LCD_LED_PWM_CHANNEL
   case C_INDEX_BRIGHTNESS:
     if (inLimit(config_value(), 0, ITEM_BRIGHTNESS_NUM-1))
       infoSettings.lcd_brightness = config_value();
