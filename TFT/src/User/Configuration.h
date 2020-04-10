@@ -25,7 +25,7 @@
  *
  * Default value is: 1 for LED_OFF
 */
-#define STARTUP_KNOB_LED_COLOR 0         // LED_OFF
+#define STARTUP_KNOB_LED_COLOR 7       // LED_OFF
 #define KEEP_KNOB_LED_COLOR_MARLIN_MODE  // Keeps the LED state in Marlin Mode
 
 /**
@@ -64,7 +64,7 @@
  *         12: DARKBLUE, 13: DARKGREEN, 14: GRAY, 15: DARKGRAY
  */
 #define ST7920_BKCOLOR 1
-#define ST7920_FNCOLOR 0
+#define ST7920_FNCOLOR 11
 
 /**
  *  Text displayed at the top of the TFT in Marlin Mode.
@@ -74,7 +74,7 @@
 /**
  *  show banner text at the top of the TFT in Marlin Mode.
  */
-#define ST7920_SHOW_BANNER true //to enabled: true | to disabled: false
+#define ST7920_SHOW_BANNER false //to enabled: true | to disabled: false
 /**
  * Run Marlin Mode in Fullscreen
  *
@@ -156,8 +156,8 @@
 
 //                       PLA      PETG       ABS
 #define PREHEAT_LABELS    {"PLA",   "PETG",   "ABS"}
-#define PREHEAT_BED      {60,      70,       100}
-#define PREHEAT_HOTEND   {200,     250,      230}
+#define PREHEAT_BED      {60,      75,       100}
+#define PREHEAT_HOTEND   {200,     245,      230}
 
 #define HEAT_MAX_TEMP    {150,    275,       275,       275,       275,       275,       275}    //max temperature can be set
 #define HEAT_SIGN_ID     {"B:",   "T0:",     "T1:",     "T2:",     "T3:",     "T4:",     "T5:"}
@@ -190,9 +190,9 @@
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS 235
+#define X_MAX_POS 225
 #define Y_MAX_POS 235
-#define Z_MAX_POS 250
+#define Z_MAX_POS 300
 
 // Specify a pause position as { X, Y, Z_raise }
 #define NOZZLE_PAUSE_RETRACT_LENGTH 15   // (mm)
